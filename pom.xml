@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>uabc</groupId>
     <artifactId>practica4</artifactId>
@@ -7,8 +8,8 @@
     <packaging>jar</packaging>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>11</maven.compiler.source> <!-- Cambiado a 11 como ejemplo, ajusta según tu JDK -->
-        <maven.compiler.target>11</maven.compiler.target> <!-- Cambiado a 11 como ejemplo, ajusta según tu JDK -->
+        <maven.compiler.source>11</maven.compiler.source>        <!-- Cambiado a 11 como ejemplo, ajusta según tu JDK -->
+        <maven.compiler.target>11</maven.compiler.target>        <!-- Cambiado a 11 como ejemplo, ajusta según tu JDK -->
         <exec.mainClass>uabc.practica4.Practica4</exec.mainClass>
     </properties>
     <dependencies>
@@ -17,5 +18,12 @@
             <artifactId>json</artifactId>
             <version>20210307</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/javazoom/jlayer -->
+        <dependency>
+            <groupId>javazoom</groupId>
+            <artifactId>jlayer</artifactId>
+            <version>1.0.1</version>
+        </dependency>
+
     </dependencies>
 </project>

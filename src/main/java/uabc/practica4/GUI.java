@@ -46,6 +46,9 @@ public class GUI {
         cardDetailTextArea = new JTextArea();
         cardDetailTextArea.setEditable(false);
         cardDetailTextArea.setLineWrap(true);
+        Insets margin = new Insets(10, 10, 10, 10);
+        cardDetailTextArea.setMargin(margin);
+        
         JScrollPane scrollPane = new JScrollPane(cardDetailTextArea);
 
         cardImageLabel = new JLabel();
@@ -74,8 +77,23 @@ public class GUI {
             }
         });
 
+        MP3Player mp3Player = new MP3Player("D:\\Documentos Locales\\6to\\Algoritmos\\practica4\\src\\main\\resources\\Yu-Gi-Oh GX.mp3");
+        mp3Player.play();
+
+        JButton muteButton = new JButton("Mute");
+        muteButton.addActionListener(e -> {
+            if (mp3Player.isPlaying()) {
+                mp3Player.stop();
+                muteButton.setText("Play");
+            } else {
+                mp3Player.play();
+                muteButton.setText("Mute");
+            }
+        });
+
         navigationPanel.add(prevButton);
         navigationPanel.add(nextButton);
+        navigationPanel.add(muteButton);
 
         frame.add(navigationPanel, BorderLayout.SOUTH);
 
