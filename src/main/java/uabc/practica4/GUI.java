@@ -29,9 +29,13 @@ public class GUI {
     private JButton sortByDefButton;
     private JCheckBox ascendingCheckBox;
     private JLabel cardImageLabel;
+    private JSONArray originalDatArray;
+
+    private JComboBox<String> attributeComboBox;
 
     public GUI(JSONArray dataArray) {
         this.dataArray = dataArray;
+        this.originalDatArray = dataArray;
     }
 
     private void createAndShowGUI() {
@@ -80,6 +84,7 @@ public class GUI {
 
         showAllButton = new JButton("Mostrar todas");
         showAllButton.addActionListener(e -> {
+            dataArray = new JSONArray(originalDatArray.toList());
             updateUI();
         });
 
@@ -91,7 +96,7 @@ public class GUI {
 
         sortByAttributeButton = new JButton("Mostrar por atributo");
         sortByAttributeButton.addActionListener(e -> {
-            sortDataArrayBy("attribute");
+            filterByAttribute();
             updateUI();
         });
 
@@ -115,12 +120,36 @@ public class GUI {
         toolbarPanel.add(sortByAtkButton);
         toolbarPanel.add(sortByDefButton);
         toolbarPanel.add(ascendingCheckBox);
+        // Dentro del método createAndShowGUI()
+
+        String[] attributes = { "LIGHT", "DARK", "WATER", "FIRE", "EARTH", "WIND" };
+        attributeComboBox = new JComboBox<>(attributes);
+
+        navigationPanel.add(attributeComboBox);
 
         frame.add(toolbarPanel, BorderLayout.NORTH);
 
         frame.setVisible(true);
         updateCardDetail();
         updateCardImage();
+    }
+
+    private void filterByAttribute() {
+        String selectedAttribute = (String) attributeComboBox.getSelectedItem();
+        {
+            List<JSONObject> filteredList = new ArrayList<>();
+            for (int i = 0; i < dataArray.length(); i++) {
+                try {
+                    JSONObject card = dataArray.getJSONObject(i);
+                    if (card.getString("attribute").equals(selectedAttribute)) {
+                        filteredList.add(card);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+            dataArray = new JSONArray(filteredList);
+        }
     }
 
     private String formatCardDetail(JSONObject card) {
